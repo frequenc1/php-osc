@@ -101,16 +101,16 @@ class OSCDatagram
                 $bin = pack("a*" . $this->get_strpad($data->bin), $data->bin);
                 break;
             case "i":
-                $bin = host_to_network_order(pack("i", $data)); // Machine-independent size (4-bytes)
+                $bin = OSCClient::host_to_network_order(pack("i", $data)); // Machine-independent size (4-bytes)
                 break;
             case "f":
-                $bin = host_to_network_order(pack("f", $data)); // Machine-dependent size
+                $bin = OSCClient::host_to_network_order(pack("f", $data)); // Machine-dependent size
                 if (strlen($bin) != 4) {
                     $this->error("Sorry, your machine uses an unsupported single-precision floating point size.");
                 }
                 break;
             case "d":
-                $bin = host_to_network_order(pack("d", $data)); // Machine-dependent size
+                $bin = OSCClient::host_to_network_order(pack("d", $data)); // Machine-dependent size
                 if (strlen($bin) != 8) {
                     $this->error("Sorry, your machine uses an unsupported double-precision floating point size.");
                 }
@@ -119,8 +119,8 @@ class OSCDatagram
                 if (is_null($data)) {
                     $data = new Timetag();
                 }
-                $bin = host_to_network_order(pack("L", $data->sec)) .
-                    host_to_network_order(pack("L", $data->frac_sec));
+                $bin = OSCClient::host_to_network_order(pack("L", $data->sec)) .
+                    OSCClient::host_to_network_order(pack("L", $data->frac_sec));
                 break;
         }
         if (strlen($bin) % 4 != 0) {
