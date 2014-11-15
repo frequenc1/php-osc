@@ -66,6 +66,7 @@ class OSCMessage extends OSCDatagram
      */
     function get_type($data)
     {
+        echo('' . gettype($data));
         switch (gettype($data)) {
             case "integer":
                 return "i";
@@ -85,14 +86,14 @@ class OSCMessage extends OSCDatagram
                 return "A";
             case "object":
                 switch (strtolower(get_class($data))) {
-                    case "infinitum":
+                    case "phposc\\infinitum":
                         return "I";
-                    case "timetag":
+                    case "phposc\\timetag":
                         return "t";
-                    case "blob":
+                    case "phposc\\blob":
                         return "b";
                     default:
-                        $this->error("Unknown or unsupported object type.");
+                        $this->error("Unknown or unsupported object type." . strtolower(get_class($data)));
                 }
             case "NULL":
                 return "N";

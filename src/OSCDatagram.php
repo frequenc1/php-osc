@@ -42,8 +42,8 @@ namespace PhpOSC;
 class OSCDatagram
 {
 // Virtual private data
-    var $bin = NULL;
-    var $data = NULL;
+    var $bin = null;
+    var $data = null;
 
 // Virtual functions
     function get_binary()
@@ -59,7 +59,7 @@ class OSCDatagram
      * Non-printable bytes will appear in hex, e.g. '20' for a space (\s) character
      * Bytes are clustered in groups of 4 to show the alignment.
      */
-    function get_human_readable($hex_only = FALSE)
+    function get_human_readable($hex_only = false)
     {
         $bin = $this->get_binary();
         $hex = "";
@@ -155,6 +155,7 @@ class OSCDatagram
      */
     function error($message)
     {
-        trigger_error("OSCDatagram Error: $message", E_USER_ERROR);
+        throw new OSCException("OSCDatagram Error: $message");
+        //trigger_error("OSCDatagram Error: $message", E_USER_ERROR);
     }
 }
