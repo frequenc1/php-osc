@@ -66,7 +66,6 @@ class OSCMessage extends OSCDatagram
      */
     function get_type($data)
     {
-        echo('' . gettype($data));
         switch (gettype($data)) {
             case "integer":
                 return "i";
@@ -149,7 +148,7 @@ class OSCMessage extends OSCDatagram
                 $this->typetags .= "]";
                 return $data;
             default:
-                trigger_error("Unrecognized type tag, '$type_tag'", E_USER_ERROR);
+                throw new OSCException("Unrecognized type tag, '$type_tag'");
         }
     }
 
